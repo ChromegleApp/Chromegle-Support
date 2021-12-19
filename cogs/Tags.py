@@ -80,7 +80,7 @@ class Tags(commands.Cog):
             )
 
             eb.set_footer(
-                text=f"Created by {owner} • {BotUtil.time_from_unix(tag.create_time)}",
+                text=f"Requested by {context.author} • Created at {BotUtil.time_from_unix(tag.create_time)} by {owner}",
                 icon_url=owner.avatar_url
             )
 

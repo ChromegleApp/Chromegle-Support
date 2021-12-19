@@ -57,26 +57,27 @@ class Support(commands.Cog):
         message: Message = await self.channel.history().get()
         old_message_id: int = data.get('SupportMessageID', 0)
 
-        # Same? Buh-bye
-        if int(message.id) == int(old_message_id):
-            return
+        if message is not None:
+            # Same? Buh-bye
+            if int(message.id) == int(old_message_id):
+                return
 
-        # Get the old message object
-        try: m = await self.channel.fetch_message(old_message_id)
-        except: m = None
+            # Get the old message object
+            try: m = await self.channel.fetch_message(old_message_id)
+            except: m = None
 
-        # Remove the old message
-        if m is not None:
-            await m.delete()
+            # Remove the old message
+            if m is not None:
+                await m.delete()
 
         # Paste the new message
         eb = discord.Embed(
-            title="So... you need help?",
+            title="So... you need help? We've got you covered!",
             description=(
-                "If you need information on downloading Chromegle, check <#869399708865560608> before "
+                "If you need information on downloading Chromegle, check <#922237065222029352> before "
                 f"asking here. Otherwise, if you think your question is a common one, it might have been "
-                f"answered in <#869399602829336576> too. If all else fails, feel free to ask a question "
-                f"and we'll try to figure it out. Regards from the creator, `{await self.channel.guild.fetch_member(config.OWNER_ID)}`."
+                f"answered in <#922237064215412816> too. If all else fails, feel free to ask a question "
+                f"and we'll try to figure it out. Regards from the creator, `{await self.channel.guild.fetch_member(config.BOT_OWNER_ID)}`."
             ),
             colour=config.EMBED_COLOUR_STRD
         )

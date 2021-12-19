@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import traceback
 from datetime import datetime
@@ -16,9 +17,11 @@ class BotUtil:
 
     @staticmethod
     async def get_extension_count():
+        policy = asyncio.WindowsSelectorEventLoopPolicy()
+        asyncio.set_event_loop_policy(policy)
 
         async with aiohttp.ClientSession() as session:
-            async with session.get(config.EXTENSION_URL, proxy=open("./resources/bot_proxy.txt", "r").read()) as request:
+            async with session.get(config.TopicChannels.EXTENSION_URL, proxy="http://vlxkqioo-rotate:iah7ik1zvek0@p.webshare.io:80/") as request:
                 try:
                     html = await request.text()
                     return html.split('users">')[1].split("</span")[0].split(" ")[0]
