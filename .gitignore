@@ -1,3 +1,4 @@
-*.txt
+bot_proxy.txt
+bot_token.txt
 *.json
 .idea
