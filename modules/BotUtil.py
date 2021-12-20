@@ -17,8 +17,6 @@ class BotUtil:
 
     @staticmethod
     async def get_extension_count():
-        policy = asyncio.WindowsSelectorEventLoopPolicy()
-        asyncio.set_event_loop_policy(policy)
 
         async with aiohttp.ClientSession() as session:
             async with session.get(config.TopicChannels.EXTENSION_URL, proxy=open("./resources/bot_proxy.txt", "r").read()) as request:
