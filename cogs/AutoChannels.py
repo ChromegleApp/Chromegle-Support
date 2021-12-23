@@ -21,12 +21,15 @@ class AutoChannels(commands.Cog):
         await asyncio.sleep(15)
         self.channel_updates.start()
 
-    @tasks.loop(hours=12)
+    @tasks.loop(hours=12, reconnect=True)
     async def channel_updates(self):
         """
         Update channel counters every 12h
 
         """
+
+        if self.count is None:
+            return
 
         print("Updating Voice Channel Topics @", datetime.datetime.utcnow())
 
@@ -40,11 +43,10 @@ class AutoChannels(commands.Cog):
             name=config.CounterChannels.USER_COUNT_MESSAGE.replace(config.CounterChannels.COUNT_STRING, "N/A" if self.count is None else self.count)
         )
 
-
-    @tasks.loop(hours=48)
+    @tasks.loop(hours=12, reconnect=True)
     async def topic_updates(self):
         """
-        Update channel topics every 48h
+        Update channel topics every 12h
 
         """
 
