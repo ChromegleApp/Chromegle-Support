@@ -1,4 +1,4 @@
-aiohttp~=3.8.1
+aiohttp
 py-cord~=1.7.3
 discord-components~=2.1.2
 Pillow~=8.4.0
