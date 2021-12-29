@@ -36,7 +36,6 @@ class TopicChannels:
     ]
 
 
-@dataclass
 class CounterChannels:
     COUNT_STRING: str = "%count%"
 
@@ -45,3 +44,9 @@ class CounterChannels:
 
     MEMBER_COUNT_MESSAGE: str = "Discord Members: %count%"
     USER_COUNT_MESSAGE: str = "App Users: %count%"
+
+
+class JoinLeave:
+    MESSAGE_CHANNEL_ID: int = 922239125157969930
+    JOIN_COLOUR: hex = 0x3bb879
+    LEAVE_COLOUR: hex = 0xd9092f

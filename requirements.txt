@@ -1,2 +1,4 @@
 aiohttp
 py-cord
+discord-components
+Pillow
