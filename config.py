@@ -47,6 +47,6 @@ class CounterChannels:
 
 
 class JoinLeave:
-    MESSAGE_CHANNEL_ID: int = 922239125157969930
+    MESSAGE_CHANNEL_ID: int = 925620656547172452
     JOIN_COLOUR: hex = 0x3bb879
     LEAVE_COLOUR: hex = 0xd9092f
