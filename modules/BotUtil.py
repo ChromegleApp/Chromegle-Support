@@ -1,4 +1,3 @@
-import asyncio
 import logging
 import traceback
 from datetime import datetime
@@ -32,11 +31,22 @@ class BotUtil:
             return None
 
     @staticmethod
-    def jsonify_member(member):
+    async def get_omegle_count():
 
-        return {
-            "avatar_url": str(member.avatar_url),
-            "name": member.name,
-            "discriminator": member.discriminator,
-            "id": member.id,
-        }
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(config.CounterChannels.OMEGLE_STATS_URL) as request:
+                    try:
+                        response = await request.json()
+                        return response["payload"]["count"]
+                    except:
+                        logging.error(traceback.format_exc())
+                        return None
+        except:
+            logging.error(traceback.format_exc())
+            return None
+
+    @staticmethod
+    def reduce_granularity(x: float, n: int = 2):
+        _x = str(x)
+        return int(_x[:n] + "0" * (len(_x) - n))

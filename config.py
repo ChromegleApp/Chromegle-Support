@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Tuple, List
 
 BOT_PREFIX = "!"
@@ -44,6 +43,10 @@ class CounterChannels:
 
     MEMBER_COUNT_MESSAGE: str = "Discord Members: %count%"
     USER_COUNT_MESSAGE: str = "App Users: %count%"
+
+    OMEGLE_STATS_URL: str = "https://chromegle.isaackogan.com/omegle/stats"
+    OMEGLE_COUNT_CHANNEL_ID: int = 926334350100951091
+    OMEGLE_COUNT_MESSAGE: str = "Omegle Users: %count%"
 
 
 class JoinLeave:
