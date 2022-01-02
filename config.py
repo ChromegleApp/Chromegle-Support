@@ -53,3 +53,14 @@ class JoinLeave:
     MESSAGE_CHANNEL_ID: int = 925620656547172452
     JOIN_COLOUR: hex = 0x3bb879
     LEAVE_COLOUR: hex = 0xd9092f
+
+
+class LinkFilter:
+    """
+    Configuration for the URL filter
+
+    """
+
+    WHITELIST_PATH: str = "./resources/url_whitelist.txt"
+    SEND_WARNING_DM: bool = True
+    WARNING_MESSAGE: str = "Please **do not send links** to the Chromegle discord server! You sent `%s`. Thank you for your co-operation. :slight_smile:"
