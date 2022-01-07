@@ -31,7 +31,7 @@ class TopicChannels:
         (922234489336377385, "**[Click Me!] - [https://github.com/ChromegleApp/Chromegle]** - Chromegle client update news and information"),
         (922234591538987049, "**[Click Me!] - [https://github.com/ChromegleApp/Chromegle]** - Chromegle client update news and information"),
         (922237064215412816, "**[Statistics: %users% Users]** - Got a question? We might have an answer. If not, go ahead and ask in <#922237219404673104>."),
-        (922237219404673104, "**[Statistics: %users% Users]** - Need support? Can't figure something out? We'd love to try and help you out.")
+        (922234839233609849, "**[Statistics: %users% Users]** - Need support? Can't figure something out? We'd love to try and help you out.")
     ]
 
 
