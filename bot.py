@@ -2,11 +2,20 @@ import platform, os
 import discord
 from discord.ext import tasks
 from discord.ext.commands import Bot
+from dislash import InteractionClient
+
 import config
 
 
-bot = Bot(command_prefix=config.BOT_PREFIX, case_insensitive=True, intents=discord.Intents().all())
+class ChromegleSupport(Bot):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+bot = ChromegleSupport(command_prefix=config.BOT_PREFIX, case_insensitive=True, intents=discord.Intents().all())
 bot.remove_command("help")
+inter_client: InteractionClient = InteractionClient(bot)
 
 
 @bot.event
