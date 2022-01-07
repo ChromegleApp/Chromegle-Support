@@ -64,3 +64,9 @@ class LinkFilter:
     WHITELIST_PATH: str = "./resources/url_whitelist.txt"
     SEND_WARNING_DM: bool = True
     WARNING_MESSAGE: str = "Please **do not send links** to the Chromegle discord server! You sent `%s`. Thank you for your co-operation. :slight_smile:"
+
+    IGNORED_ROLES = [
+        922295829950238751,  # Bots disguised as humans
+        922249784012709920,  # Admin
+        928873845992063047,  # Family
+    ]
