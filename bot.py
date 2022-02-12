@@ -1,4 +1,6 @@
-import platform, os
+import os
+import platform
+
 import discord
 from discord.ext import tasks
 from discord.ext.commands import Bot
@@ -29,10 +31,8 @@ async def on_ready():
     print("-------------------")
 
 
-
 @bot.event
 async def on_message(message):
-
     # Ignores Bot Messages
     if message.author == bot.user or message.author.bot:
         return
@@ -68,6 +68,5 @@ if __name__ == "__main__":
                 except Exception as ex:
                     exception = f"{type(ex).__name__}: {ex}"
                     print(f"Failed to load extension {cog}\n{exception}")
-
 
     bot.run(open("resources/bot_token.txt").read())

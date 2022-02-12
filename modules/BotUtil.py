@@ -16,15 +16,14 @@ class BotUtil:
 
     @staticmethod
     async def get_extension_count():
-
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(config.TopicChannels.EXTENSION_URL, proxy=open("./resources/bot_proxy.txt", "r").read()) as request:
                     try:
                         html = await request.text()
                         return html.split('users">')[1].split("</span")[0].split(" ")[0]
-                    except:
-                        logging.error(traceback.format_exc())
+                    except Exception as ex:
+                        logging.error(f"Failed to get extension count:", str(ex))
                         return None
         except:
             logging.error(traceback.format_exc())
@@ -32,7 +31,6 @@ class BotUtil:
 
     @staticmethod
     async def get_omegle_count():
-
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(config.CounterChannels.OMEGLE_STATS_URL) as request:

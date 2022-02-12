@@ -122,7 +122,6 @@ class JoinLeave(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member: Member):
-
         if int(member.guild.id) != config.HOME_GUILD_ID:
             return
 
@@ -130,10 +129,9 @@ class JoinLeave(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: Member):
-
         if int(member.guild.id) != config.HOME_GUILD_ID:
             return
-        
+
         await self.__send_join_leave_message(is_join=False, member=member)
 
 

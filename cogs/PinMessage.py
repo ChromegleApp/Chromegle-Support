@@ -66,7 +66,6 @@ class AutoChannels(commands.Cog):
             return
 
         # Pin Message
-        await interaction.message.pin()
         await interaction.reply(
             embed=discord.Embed(
                 description=(
@@ -77,6 +76,7 @@ class AutoChannels(commands.Cog):
             ).set_author(
                 name=str(interaction.author), icon_url=interaction.author.avatar_url)
         )
+        await interaction.message.pin()
 
     @inter_client.message_command(name="Unpin Message", guild_ids=[config.HOME_GUILD_ID])
     @dislash.cooldown(1, 3600, type=BucketType.user)
@@ -106,7 +106,6 @@ class AutoChannels(commands.Cog):
             return
 
         # Unpin Message
-        await interaction.message.unpin()
         await interaction.reply(
             embed=discord.Embed(
                 description=(
@@ -117,6 +116,7 @@ class AutoChannels(commands.Cog):
             ).set_author(
                 name=str(interaction.author), icon_url=interaction.author.avatar_url)
         )
+        await interaction.message.unpin()
 
     @pin.error
     @unpin.error
