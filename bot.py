@@ -13,49 +13,42 @@ class ChromegleSupport(Bot):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.remove_command("help")
+
+    async def on_ready(self):
+        print("-------------------")
+        print(f"Logged in as {self.user.name}")
+        print(f"Discord.py API version: {discord.__version__}")
+        print(f"Python version: {platform.python_version()}")
+        print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
+        print("Go for launch!")
+        print("-------------------")
+
+    async def on_message(self, message):
+        # Ignores Bot Messages
+        if message.author == bot.user or message.author.bot:
+            return
+
+        # No DMs Sadly
+        if isinstance(message.channel, discord.channel.DMChannel):
+            return
+
+        await bot.process_commands(message)
+
+    async def on_command_error(self, context, error):
+        if context.command is not None:
+            if context.command.has_error_handler():
+                return
+
+        # No command? Ignore.
+        if isinstance(error, discord.ext.commands.errors.CommandNotFound):
+            return
+
+        raise error
 
 
 bot = ChromegleSupport(command_prefix=config.BOT_PREFIX, case_insensitive=True, intents=discord.Intents().all())
-bot.remove_command("help")
 inter_client: InteractionClient = InteractionClient(bot)
-
-
-@bot.event
-async def on_ready():
-    print("-------------------")
-    print(f"Logged in as {bot.user.name}")
-    print(f"Discord.py API version: {discord.__version__}")
-    print(f"Python version: {platform.python_version()}")
-    print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
-    print("Go for launch!")
-    print("-------------------")
-
-
-@bot.event
-async def on_message(message):
-    # Ignores Bot Messages
-    if message.author == bot.user or message.author.bot:
-        return
-
-    # No DMs Sadly
-    if isinstance(message.channel, discord.channel.DMChannel):
-        return
-
-    await bot.process_commands(message)
-
-
-@bot.event
-async def on_command_error(context, error):
-    if context.command is not None:
-        if context.command.has_error_handler():
-            return
-
-    # No command? Ignore.
-    if isinstance(error, discord.ext.commands.errors.CommandNotFound):
-        return
-
-    raise error
-
 
 if __name__ == "__main__":
     for (dirpath, dirnames, filenames) in os.walk(config.COG_PATH):
