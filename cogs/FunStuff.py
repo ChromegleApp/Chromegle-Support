@@ -32,20 +32,44 @@ class FunStuff(commands.Cog):
         embed.add_field(
             name="Within 10 Minutes",
             value=(
-                f"Chats Started: `{stats['within_ten_minutes']['chats_started']:,} times`\n"
-                f"Chats Ended: `{stats['within_ten_minutes']['chats_ended']:,} times`\n"
-                f"Omegle Opened: `{stats['within_ten_minutes']['times_opened']:,} times`\n"
-            )
+                f"Chats Started: `{stats['ten_minutes']['chats_started']:,} times`\n"
+                f"Chats Ended: `{stats['ten_minutes']['chats_ended']:,} times`\n"
+                f"Omegle Opened: `{stats['ten_minutes']['times_opened']:,} times`\n"
+            ),
+            inline=False
 
         )
 
         embed.add_field(
-            name="All Time",
+            name="Since Midnight",
             value=(
-                f"Chats Started: `{stats['all_time']['chats_started']:,} times`\n"
-                f"Chats Ended: `{stats['all_time']['chats_ended']:,} times`\n"
-                f"Omegle Opened: `{stats['all_time']['times_opened']:,} times`\n"
-            )
+                f"Chats Started: `{stats['today']['chats_started']:,} times`\n"
+                f"Chats Ended: `{stats['today']['chats_ended']:,} times`\n"
+                f"Omegle Opened: `{stats['today']['times_opened']:,} times`\n"
+            ),
+            inline=False
+
+        )
+
+        embed.add_field(
+            name="Within 7 Days",
+            value=(
+                f"Chats Started: `{stats['week']['chats_started']:,} times`\n"
+                f"Chats Ended: `{stats['week']['chats_ended']:,} times`\n"
+                f"Omegle Opened: `{stats['week']['times_opened']:,} times`\n"
+            ),
+            inline=False
+
+        )
+
+        embed.add_field(
+            name="Within All Time",
+            value=(
+                f"Chats Started: `{stats['forever']['chats_started']:,} times`\n"
+                f"Chats Ended: `{stats['forever']['chats_ended']:,} times`\n"
+                f"Omegle Opened: `{stats['forever']['times_opened']:,} times`\n"
+            ),
+            inline=False
 
         )
 

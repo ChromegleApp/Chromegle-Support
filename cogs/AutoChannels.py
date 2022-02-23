@@ -16,6 +16,7 @@ class AutoChannels(commands.Cog):
         self.bot = bot
         self.extension_count = None
         self.omegle_count = None
+        self.chromegle_count = None
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -40,6 +41,12 @@ class AutoChannels(commands.Cog):
             logging.error(traceback.format_exc())
             print("Failed to retrieve new Omegle user count @", datetime.datetime.utcnow())
 
+        try:
+            self.chromegle_count = await BotUtil.get_chromegle_count()
+        except:
+            logging.error(traceback.format_exc())
+            print("Failed to retrieve new Chromegle online count @", datetime.datetime.utcnow())
+
         if self.omegle_count is not None:
             omegle_users_channel: VoiceChannel = await self.bot.fetch_channel(config.CounterChannels.OMEGLE_COUNT_CHANNEL_ID)
             await omegle_users_channel.edit(
@@ -47,6 +54,12 @@ class AutoChannels(commands.Cog):
                     config.CounterChannels.COUNT_STRING,
                     f"{BotUtil.reduce_granularity(self.omegle_count):,}+"
                 )
+            )
+
+        if self.chromegle_count is not None:
+            user_channel: VoiceChannel = await self.bot.fetch_channel(config.CounterChannels.ONLINE_COUNT_CHANNEL_ID)
+            await user_channel.edit(
+                name=config.CounterChannels.ONLINE_COUNT_MESSAGE.replace(config.CounterChannels.COUNT_STRING, str(self.chromegle_count))
             )
 
     @tasks.loop(hours=12, reconnect=True)
