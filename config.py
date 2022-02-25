@@ -40,13 +40,12 @@ class CounterChannels:
 
     MEMBER_COUNT_CHANNEL_ID: int = 922234989452615741
     USER_COUNT_CHANNEL_ID: int = 922235111708164127
-    ONLINE_COUNT_CHANNEL_ID: int = 945917371472826388
     OMEGLE_COUNT_CHANNEL_ID: int = 926334350100951091
 
     OMEGLE_COUNT_MESSAGE: str = "Omegle Users: %count%"
     MEMBER_COUNT_MESSAGE: str = "Discord Members: %count%"
-    USER_COUNT_MESSAGE: str = "Total App Users: %count%"
-    ONLINE_COUNT_MESSAGE: str = "Online App Users: %count%"
+    USER_COUNT_MESSAGE: str = "App Downloads: %count%"
+    ONLINE_COUNT_MESSAGE: str = "%count% Online App Users"
 
     OMEGLE_STATS_URL: str = "https://chromegle.isaackogan.com/omegle/stats"
     CHROMEGLE_STATS_URL: str = "https://chromegle.isaackogan.com/chromegle/stats"
