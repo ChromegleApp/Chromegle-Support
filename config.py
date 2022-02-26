@@ -44,8 +44,8 @@ class CounterChannels:
 
     OMEGLE_COUNT_MESSAGE: str = "Omegle Users: %count%"
     MEMBER_COUNT_MESSAGE: str = "Discord Members: %count%"
-    USER_COUNT_MESSAGE: str = "App Downloads: %count%"
-    ONLINE_COUNT_MESSAGE: str = "%count% Online App Users"
+    USER_COUNT_MESSAGE: str = "Downloads: %count%"
+    ONLINE_COUNT_MESSAGE: str = "%count% Online on App"
 
     OMEGLE_STATS_URL: str = "https://chromegle.isaackogan.com/omegle/stats"
     CHROMEGLE_STATS_URL: str = "https://chromegle.isaackogan.com/chromegle/stats"
