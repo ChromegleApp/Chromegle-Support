@@ -1,21 +1,31 @@
+from __future__ import annotations
+
 import os
 import platform
+from typing import Optional
 
 import discord
-from discord.ext import tasks
 from discord.ext.commands import Bot
 from dislash import InteractionClient
 
 import config
+from modules.FileUtils import file_type_search
 
 
 class ChromegleSupport(Bot):
+    inter_client: Optional[InteractionClient] = None
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, command_prefix, **options):
+        super().__init__(command_prefix, **options)
+        ChromegleSupport.inter_client = InteractionClient(self)
         self.remove_command("help")
 
-    async def on_ready(self):
+    async def on_ready(self) -> None:
+        """
+        Send some start-up messages on Bot Ready State
+        :return: None
+
+        """
         print("-------------------")
         print(f"Logged in as {self.user.name}")
         print(f"Discord.py API version: {discord.__version__}")
@@ -30,36 +40,39 @@ class ChromegleSupport(Bot):
             return
 
         # No DMs Sadly
-        if isinstance(message.channel, discord.channel.DMChannel):
+        if not message.guild:
             return
 
         await bot.process_commands(message)
 
-    async def on_command_error(self, context, error):
-        if context.command is not None:
-            if context.command.has_error_handler():
-                return
+    def load_extensions(self) -> ChromegleSupport:
+        """
+        Load bot extensions from recursive file search
+        :return: None
 
-        # No command? Ignore.
-        if isinstance(error, discord.ext.commands.errors.CommandNotFound):
-            return
+        """
 
-        raise error
+        cogs: list = [cog.replace("./", "").replace("/", ".").replace(".py", "") for cog in file_type_search('./cogs', '.py')]
+
+        for cog in cogs:
+            try:
+                self.load_extension(cog)
+                print(f"[COG] Loaded bot extension", f"/{cog.replace('.', '/')}.py")
+            except Exception as ex:
+                print(f"Failed to load extension", cog, f"{type(ex).__name__}: {ex}")
+
+        return self
 
 
-bot = ChromegleSupport(command_prefix=config.BOT_PREFIX, case_insensitive=True, intents=discord.Intents().all())
-inter_client: InteractionClient = InteractionClient(bot)
+bot = (
+    ChromegleSupport(
+        command_prefix=config.BOT_PREFIX,
+        help_command=None,
+        intents=discord.Intents.all(),
+        case_insensitive=True,
+        sync_commands=False
+    ).load_extensions()
+)
 
-if __name__ == "__main__":
-    for (dirpath, dirnames, filenames) in os.walk(config.COG_PATH):
-        for file in filenames:
-            if file.endswith(".py"):
-                cog = f"{config.COG_PATH[2:]}.{file.replace('.py', '')}"
-                try:
-                    bot.load_extension(cog)
-                    print(f"[COG] Loaded bot extension {(cog[cog.rfind('.') + 1:]).lower()}.py")
-                except Exception as ex:
-                    exception = f"{type(ex).__name__}: {ex}"
-                    print(f"Failed to load extension {cog}\n{exception}")
-
+if __name__ == '__main__':
     bot.run(open("resources/bot_token.txt").read())

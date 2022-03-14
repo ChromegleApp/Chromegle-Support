@@ -23,7 +23,7 @@ BOT_OWNER_ID: int = 699802828356583435
 
 
 class TopicChannels:
-    EXTENSION_URL: str = "https://chrome.google.com/webstore/detail/chromegle-omegle-ip-pulle/gcbbaikjfjmidabapdnebofcmconhdbn?hl=en"
+    EXTENSION_URL: str = "https://img.shields.io/chrome-web-store/users/gcbbaikjfjmidabapdnebofcmconhdbn.json"
     TOPIC_STRING: str = "%users%"
 
     TOPIC_CHANNELS: List[Tuple[int, str]] = [

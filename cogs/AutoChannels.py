@@ -96,7 +96,10 @@ class AutoChannels(commands.Cog):
         """
 
         try:
-            count = await BotUtil.get_extension_count()
+            count: str = await BotUtil.get_extension_count()
+            if count.endswith("k"):
+                count = count[:len(count) - 1] + ",000+ "
+
             self.extension_count = count if count is not None else "N/A"
         except:
             logging.error(traceback.format_exc())

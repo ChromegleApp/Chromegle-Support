@@ -18,12 +18,11 @@ class BotUtil:
     async def get_extension_count():
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.get(config.TopicChannels.EXTENSION_URL, proxy=open("./resources/bot_proxy.txt", "r").read()) as request:
+                async with session.get(config.TopicChannels.EXTENSION_URL) as request:
                     try:
-                        html = await request.text()
-                        return html.split('users">')[1].split("</span")[0].split(" ")[0]
+                        data = await request.json()
+                        return data["value"]
                     except Exception as ex:
-                        logging.error(f"Failed to get extension count:", str(ex))
                         return None
         except:
             logging.error(traceback.format_exc())

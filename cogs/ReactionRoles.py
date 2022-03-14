@@ -1,9 +1,8 @@
-import json
-
 import discord
 from discord import Member, Role
 from discord.ext import commands
-from discord_components import DiscordComponents, Button, ButtonStyle
+from discord_components import Button, ButtonStyle
+from dislash import MessageInteraction
 
 import config
 
@@ -27,7 +26,6 @@ class ReactionRoles(commands.Cog):
 
     @commands.command()
     async def rmenu(self, context):
-
         if not int(context.author.id) in config.BOT_ADMINS:
             return
 
@@ -67,19 +65,20 @@ class ReactionRoles(commands.Cog):
         )
 
     @commands.Cog.listener()
-    async def on_button_click(self, res):
-
-        await res.respond(type=6)
+    async def on_button_click(self, res: MessageInteraction):
+        try:
+            await res.respond(type=6)
+        except:
+            pass
 
         # Must be in a guild
         if res.guild is None:
             return
 
-        member: Member = await res.guild.fetch_member(res.user.id)
+        member: Member = await res.guild.fetch_member(res.author.id)
 
         # For each item
         for item in self.labels:
-
             # If they clicked the item
             if res.component.label == item['label']:
                 # Get the role
@@ -88,9 +87,9 @@ class ReactionRoles(commands.Cog):
                 # If they have the role
                 if role in member.roles:
                     await member.remove_roles(role)
-                    await self.send_dm(res.user, f"Removed role `{role.name}`")
+                    await self.send_dm(res.author, f"Removed role `{role.name}`")
                 else:
-                    await self.send_dm(res.user, f"Added role `{role.name}`")
+                    await self.send_dm(res.author, f"Added role `{role.name}`")
                     await member.add_roles(role)
 
     @staticmethod
@@ -103,5 +102,4 @@ class ReactionRoles(commands.Cog):
 
 
 def setup(bot):
-    DiscordComponents(bot)
     bot.add_cog(ReactionRoles(bot))

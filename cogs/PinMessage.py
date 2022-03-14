@@ -6,7 +6,7 @@ from discord.ext.commands import BucketType
 from dislash import ContextMenuInteraction, CommandOnCooldown
 
 import config
-from bot import ChromegleSupport, inter_client
+from bot import ChromegleSupport
 
 
 class AutoChannels(commands.Cog):
@@ -14,7 +14,7 @@ class AutoChannels(commands.Cog):
     def __init__(self, bot: ChromegleSupport):
         self.bot = bot
 
-    @inter_client.message_command(name="Pin Message", guild_ids=[config.HOME_GUILD_ID])
+    @ChromegleSupport.inter_client.message_command(name="Pin Message", guild_ids=[config.HOME_GUILD_ID])
     @dislash.cooldown(3, 3600, type=BucketType.user)
     async def pin(self, interaction: ContextMenuInteraction):
         # Has message perms
@@ -30,7 +30,7 @@ class AutoChannels(commands.Cog):
             return
 
         # Is a regular message
-        if (interaction.message.type != MessageType.default):
+        if interaction.message.type != MessageType.default:
             await interaction.reply(
                 embed=discord.Embed(
                     description=f"{config.X_EMOJI} You cannot pin messages of this type.",
@@ -42,7 +42,7 @@ class AutoChannels(commands.Cog):
             return
 
         # Already Pinned
-        if (interaction.message.pinned):
+        if interaction.message.pinned:
             await interaction.reply(
                 embed=discord.Embed(
                     description=f"{config.X_EMOJI} That message is already pinned!",
@@ -78,7 +78,7 @@ class AutoChannels(commands.Cog):
         )
         await interaction.message.pin()
 
-    @inter_client.message_command(name="Unpin Message", guild_ids=[config.HOME_GUILD_ID])
+    @ChromegleSupport.inter_client.message_command(name="Unpin Message", guild_ids=[config.HOME_GUILD_ID])
     @dislash.cooldown(1, 3600, type=BucketType.user)
     async def unpin(self, interaction: ContextMenuInteraction):
         # Has message perms
@@ -94,7 +94,7 @@ class AutoChannels(commands.Cog):
             return
 
         # Not Pinned
-        if (not interaction.message.pinned):
+        if not interaction.message.pinned:
             await interaction.reply(
                 embed=discord.Embed(
                     description=f"{config.X_EMOJI} That message is not currently pinned!",

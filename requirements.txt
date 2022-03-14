@@ -1,5 +1,5 @@
 aiohttp
-py-cord~=1.7.3
+discord.py
 discord-components~=2.1.2
 Pillow~=8.4.0
 dislash.py
