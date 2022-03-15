@@ -15,7 +15,7 @@ EMBED_COLOUR_ERROR: hex = 0xf03f32
 EMBED_COLOUR_SUCCESS: hex = 0x3ec966
 EMBED_COLOUR_LOGS: hex = 0x6be2f2
 EMBED_COLOUR_GOLD: hex = 0xd97f02
-
+EMBED_COLOUR_INVIS: hex = 0x2f3136
 # Auto Support Message
 HOME_GUILD_ID: int = 922231395605159987
 AUTO_MESSAGE_CHANNEL: int = 922237219404673104
@@ -72,3 +72,11 @@ class LinkFilter:
         922249784012709920,  # Admin
         928873845992063047,  # Family
     ]
+
+
+class NSFWTesting:
+    """
+    NSFW Message Testing
+
+    """
+    TEST_CHANNEL_ID: int = 953113489772261396

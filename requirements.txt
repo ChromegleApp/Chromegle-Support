@@ -1,5 +1,5 @@
-aiohttp
-discord.py
+aiohttp~=3.8.1
+discord.py~=1.7.3
 discord-components~=2.1.2
 Pillow~=8.4.0
-dislash.py
+dislash.py~=1.4.9
