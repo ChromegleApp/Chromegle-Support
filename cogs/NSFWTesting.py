@@ -61,7 +61,8 @@ class NSFWTesting(commands.Cog):
                             colour=config.EMBED_COLOUR_INVIS
                         ))
 
-                    images.append(discord.File(buffer, filename=attachment.filename, spoiler=True))
+                    if len(image) < message.guild.filesize_limit - 1000:
+                        images.append(discord.File(buffer, filename=attachment.filename, spoiler=True))
 
         if len(images) > 0 or len(embeds) > 0:
             await message.channel.send(files=images, embeds=embeds)
