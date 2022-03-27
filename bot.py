@@ -17,7 +17,7 @@ class ChromegleSupport(Bot):
 
     def __init__(self, command_prefix, **options):
         super().__init__(command_prefix, **options)
-        ChromegleSupport.inter_client = InteractionClient(self)
+        ChromegleSupport.inter_client = InteractionClient(self, sync_commands=True)
         self.remove_command("help")
 
     async def on_ready(self) -> None:
