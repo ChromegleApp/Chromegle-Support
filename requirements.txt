@@ -1,6 +1,6 @@
-aiohttp~=3.8.1
-discord-components~=2.1.2
+git+https://github.com/kiki7000/discord.py-components
 Pillow~=8.4.0
 dislash.py~=1.4.9
 discord-py-slash-command==3.0.3
 aiocron
+discord.py~=1.7.3
