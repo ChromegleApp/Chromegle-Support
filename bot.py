@@ -75,7 +75,4 @@ bot = (
 )
 
 if __name__ == '__main__':
-    """
-    Invite via 1021515865499385958
-    """
     bot.run(open("resources/bot_token.txt").read())
